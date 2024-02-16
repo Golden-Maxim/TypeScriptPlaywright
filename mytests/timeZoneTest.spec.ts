@@ -1,29 +1,19 @@
-import { test, expect } from "@playwright/test";
-import MainPage from "../pages/MainPage";
-import EventPage from "../pages/EventPage";
-import BurgerMenu from "../pages/BurgerMenu";
-import SettingsPage from "../pages/SettingsPage";
-import DatePicker from "../utils/DatePicker";
+import {expect } from "@playwright/test";
+import {test} from "./fixtures/basePage"
 import TimeZoneUtils from "../utils/TimeZoneUtils";
 
-test.beforeEach(async ({ page }, testInfo) => {
+test.beforeEach(async ({}, testInfo) => {
   // Extend timeout for all tests running this hook by 30 seconds.
   testInfo.setTimeout(testInfo.timeout + 30000);
 });
 
-test("Time zone test", async ({ page }) => {
+test("Time zone test", async ({ page, mainPage, eventPage, burgerMenu, settingsPage, dataPicker }) => {
   await page.goto("https://www.livescore.com/en/");
 
   const cookies = await page.locator("#simpleCookieBarCloseButton");
   if (await cookies.isVisible()) {
     await cookies.click();
   }
-
-  const mainPage = new MainPage(page);
-  const eventPage = new EventPage(page);
-  const burgerMenu = new BurgerMenu(page);
-  const settingsPage = new SettingsPage(page);
-  const dataPicker = new DatePicker(page);
 
   //click date picker
   await mainPage.clickToDatePicker();
@@ -48,13 +38,16 @@ test("Time zone test", async ({ page }) => {
   await mainPage.openBurgerMenu();
   await burgerMenu.openSettingsPage();
   await settingsPage.selectTimeZone(targetTimeZone);
+ //timeout needs to be fixed
+  await page.waitForTimeout(3000);
+  const dayAfter = await eventPage.getDay();
+  const timeAfter = await eventPage.getTime();
 
-  const day2 = await eventPage.getDay();
-  const time2 = await eventPage.getTime();
+  const timeZoneFromApp = dayAfter + " " + timeAfter;
 
-  const timeZoneFromApp = day2 + " " + time2;
-
-  const whiteSpaceLessTimeZone: string = targetTimeZone.replace(/\s+/g, "");
+  const whiteSpaceLessTimeZone: string = await targetTimeZone.replace(/\s+/g, "");
+  //timeout needs to be fixed
+  await page.waitForTimeout(3000);
   const expectedTimeZone: string = await TimeZoneUtils.convertTimeZone(
     time,
     day,
