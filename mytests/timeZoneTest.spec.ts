@@ -2,18 +2,17 @@ import {expect } from "@playwright/test";
 import {test} from "./fixtures/basePage"
 import TimeZoneUtils from "../utils/TimeZoneUtils";
 
-test.beforeEach(async ({}, testInfo) => {
+test.beforeEach(async ({page}, testInfo) => {
+  await page.goto("https://www.livescore.com/en/");
+  const cookies = await page.locator("#simpleCookieBarCloseButton");
+  if (await cookies.isVisible()) {
+    await cookies.click();
+  }
   // Extend timeout for all tests running this hook by 30 seconds.
   testInfo.setTimeout(testInfo.timeout + 30000);
 });
 
 test("Time zone test", async ({ page, mainPage, eventPage, burgerMenu, settingsPage, dataPicker }) => {
-  await page.goto("https://www.livescore.com/en/");
-
-  const cookies = await page.locator("#simpleCookieBarCloseButton");
-  if (await cookies.isVisible()) {
-    await cookies.click();
-  }
 
   //click date picker
   await mainPage.clickToDatePicker();
