@@ -23,7 +23,6 @@ export default class MainPage {
 
   async verifyDatePickerIsOpened() {
     await VerifyUtils.verifyElementAttribute(this.datePicker);
-    // await this.verifyElementAttribute(this.datePicker);
     return this;
   }
 
@@ -36,7 +35,6 @@ export default class MainPage {
   }
 
   async verifyBurgerMenuIsOpened() {
-    //await this.verifyElementAttribute(this.burgerMenuBody);
     await VerifyUtils.verifyElementAttribute(this.burgerMenuBody);
   }
 

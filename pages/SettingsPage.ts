@@ -23,7 +23,6 @@ export default class SettingsPage {
   
     async selectTimeZone(option: string): Promise<void> {
       await this.clickOnDropDown();
-      //await this.verifyDropDownIsOpened();
       const neededTimeZoneLocator = `//div[text() = '${option}']`;
       await this.dropDown.locator(neededTimeZoneLocator).click();
       
