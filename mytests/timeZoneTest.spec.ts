@@ -32,7 +32,7 @@ test("Time zone test", async ({page, mainPage, eventPage, burgerMenu, settingsPa
         await mainPage.openFirstEvent();
     });
 
-    //await page.waitForTimeout(3000);
+    await page.waitForTimeout(3000);
 
     const day = await test.step('Get Day form page before changing time zone', async () => {
         return await eventPage.getDay();
@@ -52,6 +52,7 @@ test("Time zone test", async ({page, mainPage, eventPage, burgerMenu, settingsPa
         await settingsPage.selectTimeZone(targetTimeZone);
     });
 
+    await page.waitForTimeout(3000);
     const dayAfter = await test.step('Get Day form page AFTER changing time zone', async () => {
         return await eventPage.getDay();
     })

@@ -15,8 +15,10 @@
     "typescript": "^5.3.3"
   },
   "dependencies": {
+    "data-type-ts": "^1.0.3",
     "date-fns": "^3.3.1",
     "date-fns-tz": "^2.0.0",
-    "luxon": "^3.4.4"
+    "luxon": "^3.4.4",
+    "ts.data.json": "^2.2.0"
   }
 }
