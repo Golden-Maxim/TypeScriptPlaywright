@@ -2,6 +2,14 @@ import {expect, test} from "@playwright/test";
 import {User} from "../models/UserModel";
 
 
+interface User2 {
+    id: number;
+    email: string;
+    first_name: string;
+    last_name: string;
+    avatar: string;
+}
+
 test.describe.parallel("Api testing", () => {
 
     const BASE_URL = 'https://reqres.in';
