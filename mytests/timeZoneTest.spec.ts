@@ -37,20 +37,15 @@ test("Time zone test", async ({mainPage, eventPage, burgerMenu, settingsPage, da
         await settingsPage.selectTimeZone(targetTimeZone);
     });
 
-    // await page.waitForTimeout(3000);
     const dayAfter = await test.step('Get Day form page AFTER changing time zone', async () => {
         return await eventPage.getDay();
     })
-
     const timeAfter = await test.step('Get Time from page AFTER changing time zone', async () => {
         return await eventPage.getTime();
     });
 
     const timeZoneFromApp = dayAfter + " " + timeAfter;
-
     const whiteSpaceLessTimeZone: string = await targetTimeZone.replace(/\s+/g, "");
-    //timeout needs to be fixed
-    //  await page.waitForTimeout(3000);
     const expectedTimeZone: string = TimeZoneUtils.convertTimeZone(
         time,
         day,
