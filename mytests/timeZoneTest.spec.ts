@@ -53,5 +53,5 @@ test("Time zone test", async ({mainPage, eventPage, burgerMenu, settingsPage, da
         whiteSpaceLessTimeZone
     );
 
-    await expect(timeZoneFromApp).toEqual(expectedTimeZone);
+    expect(timeZoneFromApp).toEqual(expectedTimeZone);
 });
