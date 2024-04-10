@@ -2,13 +2,13 @@ import {expect} from "@playwright/test";
 import {test} from "./fixtures/basePage"
 import TimeZoneUtils from "../utils/TimeZoneUtils";
 
-test.beforeEach(async ({page}) => {
-    await page.goto("https://www.livescore.com/en/");
-    const cookies = page.locator("#simpleCookieBarCloseButton");
-    if (await cookies.isVisible()) {
-        await cookies.click();
-    }
-});
+// test.beforeEach(async ({page}) => {
+//     await page.goto("https://www.livescore.com/en/");
+//     const cookies = page.locator("#simpleCookieBarCloseButton");
+//     if (await cookies.isVisible()) {
+//         await cookies.click();
+//     }
+// });
 
 test("Time zone test", async ({mainPage, eventPage, burgerMenu, settingsPage, dataPicker}) => {
 

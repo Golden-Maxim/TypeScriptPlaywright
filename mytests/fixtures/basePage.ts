@@ -17,10 +17,16 @@ interface PageObjects {
 export const test = base.extend<PageObjects>({
     //Define a fixtures
     mainPage: async ({page}, use) => {
+        await page.goto("https://www.livescore.com/en/");
+        const cookies = page.locator("#simpleCookieBarCloseButton");
+        if (await cookies.isVisible()) {
+            await cookies.click();
+        }
         await use(new MainPage(page));
     },
     eventPage: async ({page}, use) => {
         await use(new EventPage(page));
+        await page.close();
     },
     burgerMenu: async ({page}, use) => {
         await use(new BurgerMenu(page));
