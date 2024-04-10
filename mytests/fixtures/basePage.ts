@@ -5,13 +5,16 @@ import BurgerMenu from "../../pages/BurgerMenu";
 import SettingsPage from "../../pages/SettingsPage";
 import DatePicker from "../../utils/DatePicker";
 
-export const test = base.extend<{
+
+interface PageObjects {
     mainPage: MainPage;
     eventPage: EventPage;
     burgerMenu: BurgerMenu;
     settingsPage: SettingsPage;
     dataPicker: DatePicker;
-}>({
+}
+
+export const test = base.extend<PageObjects>({
     //Define a fixtures
     mainPage: async ({page}, use) => {
         await use(new MainPage(page));
